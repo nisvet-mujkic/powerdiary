@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerDiary.Messaging.Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerDiary.Messaging.UnitTests", "PowerDiary.Messaging.UnitTests\PowerDiary.Messaging.UnitTests.csproj", "{000DF6D5-A7AA-4696-BE95-932BF7F04853}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerDiary.Messaging.Application", "PowerDiary.Messaging.Application\PowerDiary.Messaging.Application.csproj", "{D492F5C7-3B4E-41FC-9698-EE93B3FCB381}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{000DF6D5-A7AA-4696-BE95-932BF7F04853}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{000DF6D5-A7AA-4696-BE95-932BF7F04853}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{000DF6D5-A7AA-4696-BE95-932BF7F04853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D492F5C7-3B4E-41FC-9698-EE93B3FCB381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D492F5C7-3B4E-41FC-9698-EE93B3FCB381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D492F5C7-3B4E-41FC-9698-EE93B3FCB381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D492F5C7-3B4E-41FC-9698-EE93B3FCB381}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 		{EDAC0F02-64B5-427A-BDE7-38E51861CFB2} = {195FB731-C074-4652-858E-25E4871AF110}
 		{DA2633C2-318A-44C9-9A48-96B0A28A097B} = {20F7E889-A4E8-4F0B-9FCA-FEC179D1B639}
 		{000DF6D5-A7AA-4696-BE95-932BF7F04853} = {CC909185-9AD2-4610-BBBF-706FAACC5359}
+		{D492F5C7-3B4E-41FC-9698-EE93B3FCB381} = {EDAC0F02-64B5-427A-BDE7-38E51861CFB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13ABF00A-9BE9-4B4B-A842-8C218761A7E7}
