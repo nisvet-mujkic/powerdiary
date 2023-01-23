@@ -15,8 +15,17 @@ namespace PowerDiary.Messaging.Console
             var bob = new Participant("Bob");
             var kate = new Participant("Kate");
 
-            controller.AddParticipant(bob);
-            controller.AddParticipant(kate);
+            var now = DateTime.UtcNow;
+
+            controller.AddParticipant(bob, now);
+            controller.AddParticipant(kate, now.AddMinutes(3));
+
+            controller.AcceptComment(bob, "Hey, Kate - high five?", now.AddMinutes(6));
+            controller.AcceptHighFive(kate, bob, now.AddMinutes(7));
+
+            controller.RemoveParticipant(bob, now.AddMinutes(8));
+            controller.AcceptComment(kate, "Oh, typical", now.AddMinutes(9));
+            controller.RemoveParticipant(kate, now.AddMinutes(10));
 
             controller.DisplayEvents();
 

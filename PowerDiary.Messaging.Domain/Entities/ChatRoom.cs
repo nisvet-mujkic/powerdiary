@@ -16,6 +16,11 @@
             _participants.Add(participant);
         }
 
+        public void RemoveParticipant(Participant participant)
+        {
+            _participants.Remove(participant);
+        }
+
         public bool IsInRoom(Participant participant)
         {
             // TODO: rewrite using .Contains()

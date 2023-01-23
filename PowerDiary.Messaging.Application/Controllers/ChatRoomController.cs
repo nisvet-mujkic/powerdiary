@@ -16,17 +16,47 @@ namespace PowerDiary.Messaging.Application.Controllers
             _historyService = historyService;
         }
 
-        public void AddParticipant(Participant participant)
+        public void AddParticipant(Participant participant, DateTime at)
         {
             if (_room.IsInRoom(participant))
                 return;
 
             _room.AddParticipant(participant);
 
-            //var logMessage = BuildMessage().When().ParticipantEntersRoom(participant).Build();
-            _historyService.AddEvent("enter-the-room", $"{participant} enters the room");
+            var message = $"{at.ToShortTimeString()}: {participant} enters the room";
 
-            //var eventType = _eventsFactory.GetEvent(eventType);
+            _historyService.AddEvent(Constants.EventType.EnterTheRoom, message, at);
+        }
+
+        public void RemoveParticipant(Participant participant, DateTime at)
+        {
+            if (!_room.IsInRoom(participant))
+                return;
+
+            _room.RemoveParticipant(participant);
+
+            var message = $"{at.ToShortTimeString()}: {participant} leaves the room";
+
+            _historyService.AddEvent(Constants.EventType.LeaveTheRoom, message, at);
+        } 
+
+        public void AcceptComment(Participant participant, string comment, DateTime at)
+        {
+            if (!_room.IsInRoom(participant))
+                return;
+
+            var message = $"{at.ToShortTimeString()}: {participant} comments: \"{comment}\"";
+
+            _historyService.AddEvent(Constants.EventType.Comment, message, at);
+        }
+
+        public void AcceptHighFive(Participant from, Participant to, DateTime at)
+        {
+            if (!_room.IsInRoom(from) || !_room.IsInRoom(to))
+                return;
+
+            var message = $"{at.ToShortTimeString()}: {from} high-fives {to}";
+            _historyService.AddEvent(Constants.EventType.HighFive, message, at);
         }
 
         public void DisplayEvents()

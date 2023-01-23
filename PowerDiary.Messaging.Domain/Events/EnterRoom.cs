@@ -4,4 +4,19 @@
     {
 
     }
+
+    public class LeaveRoom : IEvent
+    {
+
+    }
+
+    public class Comment : IEvent
+    {
+
+    }
+
+    public class HighFive : IEvent
+    {
+
+    }
 }

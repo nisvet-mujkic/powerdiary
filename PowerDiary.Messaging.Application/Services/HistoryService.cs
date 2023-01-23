@@ -1,6 +1,5 @@
 ﻿using PowerDiary.Messaging.Application.Contracts.Factories;
 using PowerDiary.Messaging.Application.Contracts.Services;
-using PowerDiary.Messaging.Application.Controllers;
 using PowerDiary.Messaging.Domain.Events;
 
 namespace PowerDiary.Messaging.Application.Services
@@ -16,11 +15,11 @@ namespace PowerDiary.Messaging.Application.Services
             _eventFactory = eventFactory;
         }
 
-        public void AddEvent(string type, string message)
+        public void AddEvent(string type, string message, DateTime occurredAt)
         {
             var eventType = _eventFactory.GetEvent(type);
 
-            _events.Add(new EventEntry(eventType, message));
+            _events.Add(new EventEntry(eventType, message, occurredAt));
         }
 
         public IReadOnlyCollection<EventEntry> GetEvents()
@@ -31,14 +30,17 @@ namespace PowerDiary.Messaging.Application.Services
 
     public class EventEntry
     {
-        public EventEntry(IEvent @event, string message)
+        public EventEntry(IEvent @event, string message, DateTime occurredAt)
         {
             Event = @event;
             Message = message;
+            OccurredAt = occurredAt;
         }
 
         public IEvent Event { get; }
 
         public string Message { get; }
+
+        public DateTime OccurredAt { get; }
     }
 }
