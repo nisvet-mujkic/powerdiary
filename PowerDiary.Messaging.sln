@@ -3,9 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{195FB731-C074-4652-858E-25E4871AF110}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CC909185-9AD2-4610-BBBF-706FAACC5359}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{20F7E889-A4E8-4F0B-9FCA-FEC179D1B639}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EDAC0F02-64B5-427A-BDE7-38E51861CFB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerDiary.Messaging.Console", "PowerDiary.Messaging.Console\PowerDiary.Messaging.Console.csproj", "{DA2633C2-318A-44C9-9A48-96B0A28A097B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA2633C2-318A-44C9-9A48-96B0A28A097B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2633C2-318A-44C9-9A48-96B0A28A097B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2633C2-318A-44C9-9A48-96B0A28A097B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2633C2-318A-44C9-9A48-96B0A28A097B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20F7E889-A4E8-4F0B-9FCA-FEC179D1B639} = {195FB731-C074-4652-858E-25E4871AF110}
+		{EDAC0F02-64B5-427A-BDE7-38E51861CFB2} = {195FB731-C074-4652-858E-25E4871AF110}
+		{DA2633C2-318A-44C9-9A48-96B0A28A097B} = {20F7E889-A4E8-4F0B-9FCA-FEC179D1B639}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13ABF00A-9BE9-4B4B-A842-8C218761A7E7}
