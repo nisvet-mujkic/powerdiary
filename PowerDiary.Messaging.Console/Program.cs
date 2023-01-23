@@ -1,4 +1,5 @@
 ﻿using PowerDiary.Messaging.Application.Controllers;
+using PowerDiary.Messaging.Application.Factories;
 using PowerDiary.Messaging.Application.Services;
 using PowerDiary.Messaging.Domain.Entities;
 
@@ -9,13 +10,15 @@ namespace PowerDiary.Messaging.Console
         static void Main(string[] args)
         {
             var room = new ChatRoom();
-            var controller = new ChatRoomController(room, new HistoryService());
+            var controller = new ChatRoomController(room, new HistoryService(new EventFactory()));
 
             var bob = new Participant("Bob");
             var kate = new Participant("Kate");
 
             controller.AddParticipant(bob);
             controller.AddParticipant(kate);
+
+            controller.DisplayEvents();
 
             /*
              * main events: 

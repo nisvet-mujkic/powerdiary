@@ -9,6 +9,8 @@
 
         public string Name { get; }
 
+        public override string ToString() => Name;
+
         public void Comment(string comment) // make a value object Comment?!
         {
 

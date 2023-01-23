@@ -1,6 +1,7 @@
 ﻿using PowerDiary.Messaging.Application.Contracts.Controllers;
 using PowerDiary.Messaging.Application.Contracts.Services;
 using PowerDiary.Messaging.Domain.Entities;
+using PowerDiary.Messaging.Domain.Events;
 
 namespace PowerDiary.Messaging.Application.Controllers
 {
@@ -22,20 +23,20 @@ namespace PowerDiary.Messaging.Application.Controllers
 
             _room.AddParticipant(participant);
 
-            //var logMessage = BuildMessage();
-            _historyService.AddEvent("enter-the-room", "Bob enters the room");
+            //var logMessage = BuildMessage().When().ParticipantEntersRoom(participant).Build();
+            _historyService.AddEvent("enter-the-room", $"{participant} enters the room");
 
             //var eventType = _eventsFactory.GetEvent(eventType);
         }
-    }
 
-    public interface IEvent
-    {
+        public void DisplayEvents()
+        {
+            var events = _historyService.GetEvents();
 
-    }
-
-    public class ParticipantEntersTheRoom : IEvent
-    {
-
+            foreach (var entry in events)
+            {
+                Console.WriteLine(entry.Message);
+            }
+        }
     }
 }

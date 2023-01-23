@@ -2,6 +2,7 @@
 {
     public class ChatRoom
     {
+        // use HashSet
         private readonly IList<Participant> _participants;
         public IReadOnlyCollection<Participant> Participants => _participants.ToList();
 
