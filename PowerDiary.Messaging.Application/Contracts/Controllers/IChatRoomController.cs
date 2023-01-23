@@ -1,4 +1,5 @@
-﻿using PowerDiary.Messaging.Domain.Entities;
+﻿using PowerDiary.Messaging.Application.Contracts.Strategies;
+using PowerDiary.Messaging.Domain.Entities;
 
 namespace PowerDiary.Messaging.Application.Contracts.Controllers
 {
@@ -8,8 +9,10 @@ namespace PowerDiary.Messaging.Application.Contracts.Controllers
 
         void RemoveParticipant(Participant participant, DateTime at);
 
-        void AcceptComment(Participant participant, string comment, DateTime at);
+        void Comment(Participant participant, string comment, DateTime at);
 
-        void AcceptHighFive(Participant from, Participant to, DateTime at);
+        void HighFive(Participant from, Participant to, DateTime at);
+
+        void Display(IDisplayStrategy strategy);
     }
 }

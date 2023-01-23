@@ -1,6 +1,8 @@
-﻿using PowerDiary.Messaging.Application.Controllers;
+﻿using PowerDiary.Messaging.Application.Contracts.Controllers;
+using PowerDiary.Messaging.Application.Controllers;
 using PowerDiary.Messaging.Application.Factories;
 using PowerDiary.Messaging.Application.Services;
+using PowerDiary.Messaging.Application.Strategies;
 using PowerDiary.Messaging.Domain.Entities;
 
 namespace PowerDiary.Messaging.Console
@@ -10,24 +12,24 @@ namespace PowerDiary.Messaging.Console
         static void Main(string[] args)
         {
             var room = new ChatRoom();
-            var controller = new ChatRoomController(room, new HistoryService(new EventFactory()));
+            IChatRoomController controller = new ChatRoomController(room, new HistoryService(new EventFactory()));
 
             var bob = Participant.Create("Bob");
             var kate = Participant.Create("Kate");
 
-            var now = DateTime.UtcNow;
+            var atTime = new DateTime(2023, 1, 23, 17, 0, 0);
 
-            controller.AddParticipant(bob, now);
-            controller.AddParticipant(kate, now.AddMinutes(3));
+            controller.AddParticipant(bob, atTime);
+            controller.AddParticipant(kate, atTime.AddMinutes(3));
 
-            controller.AcceptComment(bob, "Hey, Kate - high five?", now.AddMinutes(6));
-            controller.AcceptHighFive(kate, bob, now.AddMinutes(7));
+            controller.Comment(bob, "Hey, Kate - high five?", atTime.AddMinutes(6));
+            controller.HighFive(kate, bob, atTime.AddMinutes(7));
 
-            controller.RemoveParticipant(bob, now.AddMinutes(8));
-            controller.AcceptComment(kate, "Oh, typical", now.AddMinutes(9));
-            controller.RemoveParticipant(kate, now.AddMinutes(10));
+            controller.RemoveParticipant(bob, atTime.AddMinutes(8));
+            controller.Comment(kate, "Oh, typical", atTime.AddMinutes(9));
+            controller.RemoveParticipant(kate, atTime.AddMinutes(10));
 
-            controller.DisplayEvents();
+            controller.Display(new MinuteByMinuteDisplayStrategy());
 
             /*
              * main events: 

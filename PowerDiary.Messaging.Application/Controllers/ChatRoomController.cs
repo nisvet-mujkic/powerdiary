@@ -1,5 +1,6 @@
 ﻿using PowerDiary.Messaging.Application.Contracts.Controllers;
 using PowerDiary.Messaging.Application.Contracts.Services;
+using PowerDiary.Messaging.Application.Contracts.Strategies;
 using PowerDiary.Messaging.Domain.Entities;
 
 namespace PowerDiary.Messaging.Application.Controllers
@@ -21,7 +22,6 @@ namespace PowerDiary.Messaging.Application.Controllers
                 return;
 
             var message = $"{at.ToShortTimeString()}: {participant} enters the room";
-
             _historyService.AddEvent(Constants.EventType.EnterTheRoom, message, at);
         }
 
@@ -31,21 +31,19 @@ namespace PowerDiary.Messaging.Application.Controllers
                 return;
 
             var message = $"{at.ToShortTimeString()}: {participant} leaves the room";
-
             _historyService.AddEvent(Constants.EventType.LeaveTheRoom, message, at);
         } 
 
-        public void AcceptComment(Participant participant, string comment, DateTime at)
+        public void Comment(Participant participant, string comment, DateTime at)
         {
             if (!_room.ContainsParticipant(participant))
                 return;
 
             var message = $"{at.ToShortTimeString()}: {participant} comments: \"{comment}\"";
-
             _historyService.AddEvent(Constants.EventType.Comment, message, at);
         }
 
-        public void AcceptHighFive(Participant from, Participant to, DateTime at)
+        public void HighFive(Participant from, Participant to, DateTime at)
         {
             if (!_room.ContainsParticipant(from) || !_room.ContainsParticipant(to))
                 return;
@@ -54,14 +52,11 @@ namespace PowerDiary.Messaging.Application.Controllers
             _historyService.AddEvent(Constants.EventType.HighFive, message, at);
         }
 
-        public void DisplayEvents()
+        public void Display(IDisplayStrategy strategy)
         {
             var events = _historyService.GetEvents();
 
-            foreach (var entry in events)
-            {
-                Console.WriteLine(entry.Message);
-            }
+            strategy.Display(events);
         }
     }
 }
