@@ -22,8 +22,8 @@ namespace PowerDiary.Messaging.UnitTests.Entities
             // Arrange
             var room = new ChatRoom();
 
-            var bob = new Participant("Bob");
-            var kate = new Participant("Kate");
+            var bob = Participant.Create("Bob");
+            var kate = Participant.Create("Kate");
 
             // Act
             room.AddParticipant(bob);
@@ -38,12 +38,12 @@ namespace PowerDiary.Messaging.UnitTests.Entities
         {
             // Arrange
             var room = new ChatRoom();
-            var bob = new Participant("Bob");
+            var bob = Participant.Create("Bob");
 
             room.AddParticipant(bob);
 
             // Assert
-            room.IsInRoom(bob).Should().BeTrue();
+            room.ContainsParticipant(bob).Should().BeTrue();
         }
     }
 }

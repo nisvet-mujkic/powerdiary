@@ -1,7 +1,6 @@
 ﻿using PowerDiary.Messaging.Application.Contracts.Controllers;
 using PowerDiary.Messaging.Application.Contracts.Services;
 using PowerDiary.Messaging.Domain.Entities;
-using PowerDiary.Messaging.Domain.Events;
 
 namespace PowerDiary.Messaging.Application.Controllers
 {
@@ -18,10 +17,8 @@ namespace PowerDiary.Messaging.Application.Controllers
 
         public void AddParticipant(Participant participant, DateTime at)
         {
-            if (_room.IsInRoom(participant))
+            if (!_room.AddParticipant(participant))
                 return;
-
-            _room.AddParticipant(participant);
 
             var message = $"{at.ToShortTimeString()}: {participant} enters the room";
 
@@ -30,10 +27,8 @@ namespace PowerDiary.Messaging.Application.Controllers
 
         public void RemoveParticipant(Participant participant, DateTime at)
         {
-            if (!_room.IsInRoom(participant))
+            if (!_room.RemoveParticipant(participant))
                 return;
-
-            _room.RemoveParticipant(participant);
 
             var message = $"{at.ToShortTimeString()}: {participant} leaves the room";
 
@@ -42,7 +37,7 @@ namespace PowerDiary.Messaging.Application.Controllers
 
         public void AcceptComment(Participant participant, string comment, DateTime at)
         {
-            if (!_room.IsInRoom(participant))
+            if (!_room.ContainsParticipant(participant))
                 return;
 
             var message = $"{at.ToShortTimeString()}: {participant} comments: \"{comment}\"";
@@ -52,7 +47,7 @@ namespace PowerDiary.Messaging.Application.Controllers
 
         public void AcceptHighFive(Participant from, Participant to, DateTime at)
         {
-            if (!_room.IsInRoom(from) || !_room.IsInRoom(to))
+            if (!_room.ContainsParticipant(from) || !_room.ContainsParticipant(to))
                 return;
 
             var message = $"{at.ToShortTimeString()}: {from} high-fives {to}";

@@ -2,34 +2,21 @@
 {
     public class ChatRoom
     {
-        // use HashSet
-        private readonly IList<Participant> _participants;
+        private readonly HashSet<Participant> _participants;
         public IReadOnlyCollection<Participant> Participants => _participants.ToList();
 
         public ChatRoom()
         {
-            _participants = new List<Participant>();
+            _participants = new HashSet<Participant>();
         }
 
-        public void AddParticipant(Participant participant)
-        {
+        public bool AddParticipant(Participant participant) =>
             _participants.Add(participant);
-        }
 
-        public void RemoveParticipant(Participant participant)
-        {
+        public bool RemoveParticipant(Participant participant) =>
             _participants.Remove(participant);
-        }
 
-        public bool IsInRoom(Participant participant)
-        {
-            // TODO: rewrite using .Contains()
-
-            foreach (var p in _participants)
-                if (p.Name == participant.Name)
-                    return true;
-
-            return false;
-        }
+        public bool ContainsParticipant(Participant participant) =>
+            _participants.Contains(participant);
     }
 }

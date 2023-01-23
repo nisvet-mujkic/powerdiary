@@ -1,29 +1,12 @@
 ﻿namespace PowerDiary.Messaging.Domain.Entities
 {
-    public class Participant
+    public record Participant(string Name)
     {
-        public Participant(string name)
+        public static Participant Create(string name)
         {
-            Name = name;
+            return new Participant(name);
         }
-
-        public string Name { get; }
 
         public override string ToString() => Name;
-
-        public void Comment(string comment) // make a value object Comment?!
-        {
-
-        }
-
-        public void HighFive(Participant participant)
-        {
-
-        }
-
-        public void Leave()
-        {
-
-        }
     }
 }

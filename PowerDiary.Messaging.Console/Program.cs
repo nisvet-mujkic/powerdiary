@@ -12,8 +12,8 @@ namespace PowerDiary.Messaging.Console
             var room = new ChatRoom();
             var controller = new ChatRoomController(room, new HistoryService(new EventFactory()));
 
-            var bob = new Participant("Bob");
-            var kate = new Participant("Kate");
+            var bob = Participant.Create("Bob");
+            var kate = Participant.Create("Kate");
 
             var now = DateTime.UtcNow;
 
@@ -40,13 +40,7 @@ namespace PowerDiary.Messaging.Console
             // maybe use flyweight pattern to avoid many allocations
             //var participants = room.AddParticipants(bob, kate); // dispatch an event 'enter-the-room'
 
-            bob.Comment("Hey, Kate - high five?!"); // dispatch an event 'comment'
-            kate.HighFive(bob);  // dispatch an event 'high-five-another-user'
 
-            bob.Leave();
-            kate.Comment("");
-
-            kate.Leave();
 
             //room.DisplayEvents("inject object here IDisplaySomething"); // use strategy pattern, minute by minute || houry  
 
