@@ -9,7 +9,7 @@ namespace PowerDiary.Messaging.Application.Strategies
         {
             foreach (var @event in events)
             {
-                Console.WriteLine(@event.Message);
+                Console.WriteLine(@event.OccurredAt.Hour);
             }
         }
     }

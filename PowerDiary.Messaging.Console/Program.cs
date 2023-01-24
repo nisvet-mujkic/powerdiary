@@ -17,37 +17,19 @@ namespace PowerDiary.Messaging.Console
             var bob = Participant.Create("Bob");
             var kate = Participant.Create("Kate");
 
-            var atTime = new DateTime(2023, 1, 23, 17, 0, 0);
+            var at = new DateTime(2023, 1, 23, 13, 0, 0);
 
-            controller.AddParticipant(bob, atTime);
-            controller.AddParticipant(kate, atTime.AddMinutes(3));
+            controller.AddParticipant(bob, at);
+            controller.AddParticipant(kate, at.AddMinutes(3));
 
-            controller.Comment(bob, "Hey, Kate - high five?", atTime.AddMinutes(6));
-            controller.HighFive(kate, bob, atTime.AddMinutes(7));
+            controller.PublishComment(bob, "Hey, Kate - high five?", at.AddMinutes(6));
+            controller.SendHighFive(kate, bob, at.AddMinutes(7));
 
-            controller.RemoveParticipant(bob, atTime.AddMinutes(8));
-            controller.Comment(kate, "Oh, typical", atTime.AddMinutes(9));
-            controller.RemoveParticipant(kate, atTime.AddMinutes(10));
+            controller.RemoveParticipant(bob, at.AddMinutes(8));
+            controller.PublishComment(kate, "Oh, typical", at.AddMinutes(9));
+            controller.RemoveParticipant(kate, at.AddMinutes(10));
 
             controller.Display(new MinuteByMinuteDisplayStrategy());
-
-            /*
-             * main events: 
-             * - enter-the-room
-             * - leave-the-room
-             * - comment
-             * - high-five-another-user
-             */
-
-            // maybe use flyweight pattern to avoid many allocations
-            //var participants = room.AddParticipants(bob, kate); // dispatch an event 'enter-the-room'
-
-
-
-            //room.DisplayEvents("inject object here IDisplaySomething"); // use strategy pattern, minute by minute || houry  
-
-            // use stack or queue for event history, descending chronological order, keep count of events that took place
-            // create TimeStamp value object, just to have logic of extracting date separated out
         }
     }
 }

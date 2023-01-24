@@ -7,7 +7,15 @@ namespace PowerDiary.Messaging.Application.Strategies
     {
         public void Display(IEnumerable<EventEntry> events)
         {
-            throw new NotImplementedException();
+            var grouping = events.GroupBy(x => x.OccurredAt.Hour);
+
+            foreach (var group in grouping)
+            {
+                foreach (var item in group)
+                {
+                    Console.WriteLine(item.OccurredAt.Hour);
+                }
+            }
         }
     }
 }

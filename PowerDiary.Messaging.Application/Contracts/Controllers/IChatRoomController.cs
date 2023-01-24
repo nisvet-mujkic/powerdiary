@@ -9,9 +9,9 @@ namespace PowerDiary.Messaging.Application.Contracts.Controllers
 
         void RemoveParticipant(Participant participant, DateTime at);
 
-        void Comment(Participant participant, string comment, DateTime at);
+        void PublishComment(Participant participant, string comment, DateTime at);
 
-        void HighFive(Participant from, Participant to, DateTime at);
+        void SendHighFive(Participant from, Participant to, DateTime at);
 
         void Display(IDisplayStrategy strategy);
     }
