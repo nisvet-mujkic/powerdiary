@@ -12,24 +12,25 @@ namespace PowerDiary.Messaging.Console
         static void Main(string[] args)
         {
             var room = new ChatRoom();
-            IChatRoomController controller = new ChatRoomController(room, new HistoryService(new EventFactory()));
+            IChatRoomController controller = new ChatRoomController(room, new HistoryService());
 
             var bob = Participant.Create("Bob");
             var kate = Participant.Create("Kate");
 
             var at = new DateTime(2023, 1, 23, 13, 0, 0);
 
-            controller.AddParticipant(bob, at);
-            controller.AddParticipant(kate, at.AddMinutes(3));
+            controller.AddParticipant(bob, at.AddMinutes(0));
+            controller.AddParticipant(kate, at.AddMinutes(63));
 
-            controller.PublishComment(bob, "Hey, Kate - high five?", at.AddMinutes(6));
-            controller.SendHighFive(kate, bob, at.AddMinutes(7));
+            controller.PublishComment(bob, "Hey, Kate - high five?", at.AddMinutes(76));
+            controller.SendHighFive(kate, bob, at.AddMinutes(87));
 
-            controller.RemoveParticipant(bob, at.AddMinutes(8));
-            controller.PublishComment(kate, "Oh, typical", at.AddMinutes(9));
-            controller.RemoveParticipant(kate, at.AddMinutes(10));
+            controller.RemoveParticipant(bob, at.AddMinutes(98));
+            controller.PublishComment(kate, "Oh, typical", at.AddMinutes(100));
+            controller.RemoveParticipant(kate, at.AddMinutes(135));
 
-            controller.Display(new MinuteByMinuteDisplayStrategy());
+            controller.ViewChatRoomHistory(new MinuteByMinuteAggregation());
+            //controller.ViewChatRoomHistory(new HourlyAggregation());
         }
     }
 }

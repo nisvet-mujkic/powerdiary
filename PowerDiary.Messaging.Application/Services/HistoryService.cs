@@ -1,64 +1,68 @@
-﻿using PowerDiary.Messaging.Application.Contracts.Factories;
-using PowerDiary.Messaging.Application.Contracts.Services;
+﻿using PowerDiary.Messaging.Application.Contracts.Services;
+using PowerDiary.Messaging.Application.Models;
 using PowerDiary.Messaging.Domain.Entities;
-using PowerDiary.Messaging.Domain.Events;
 
 namespace PowerDiary.Messaging.Application.Services
 {
     public class HistoryService : IHistoryService
     {
-        private readonly List<EventEntry> _events;
-        private readonly IEventFactory _eventFactory;
+        private readonly SortedList<DateTime, EventEntry> _events;
 
-        public HistoryService(IEventFactory eventFactory)
+        public HistoryService()
         {
-            _events = new List<EventEntry>();
-            _eventFactory = eventFactory;
+            _events = new SortedList<DateTime, EventEntry>();
         }
 
-        public void AddEvent(string type, Participant participant, DateTime occurredAt)
+        public void RecordEntering(Participant participant, DateTime at)
         {
-            var eventType = _eventFactory.GetEvent(type);
+            RecordEvent(new EventContext()
+            {
+                EventType = Constants.EventType.EnterTheRoom,
+                Participant = participant,
+                OccurredAt = at
+            });
+        }
 
-            _events.Add(new EventEntry(eventType, occurredAt));
+        public void RecordLeaving(Participant participant, DateTime at)
+        {
+            RecordEvent(new EventContext()
+            {
+                EventType = Constants.EventType.LeaveTheRoom,
+                Participant = participant,
+                OccurredAt = at
+            });
+        }
+
+        public void RecordComment(Participant participant, string comment, DateTime at)
+        {
+            RecordEvent(new EventContext()
+            {
+                EventType = Constants.EventType.Comment,
+                OccurredAt = at,
+                Comment = comment,
+                Participant = participant,
+            });
+        }
+
+        public void RecordHighFive(Participant from, Participant to, DateTime at)
+        {
+            RecordEvent(new EventContext()
+            {
+                EventType = Constants.EventType.HighFive,
+                OccurredAt = at,
+                Participant = from,
+                OtherParticipant = to
+            });
+        }
+
+        private void RecordEvent(EventContext context)
+        {
+            _events.Add(context.OccurredAt, new EventEntry(context));
         }
 
         public IReadOnlyCollection<EventEntry> GetEvents()
         {
-            return _events.ToList();
+            return _events.Values.ToList();
         }
-    }
-
-    public abstract class Dummy
-    {
-        public abstract string Printable { get; }
-    }
-
-    public class Enters : Dummy
-    {
-        private readonly Participant _participant;
-        private readonly string _at;
-
-        public Enters(Participant participant, DateTime at)
-        {
-            _participant = participant;
-            _at = at.ToShortTimeString();
-        }
-
-        public override string Printable => $"{_at}: {_participant} enter the room";
-    }
-
-
-    public class EventEntry
-    {
-        public EventEntry(IEvent @event, DateTime occurredAt)
-        {
-            Event = @event;
-            OccurredAt = occurredAt;
-        }
-
-        public IEvent Event { get; }
-
-        public DateTime OccurredAt { get; }
     }
 }

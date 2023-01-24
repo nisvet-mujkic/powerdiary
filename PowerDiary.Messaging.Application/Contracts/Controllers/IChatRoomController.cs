@@ -13,6 +13,6 @@ namespace PowerDiary.Messaging.Application.Contracts.Controllers
 
         void SendHighFive(Participant from, Participant to, DateTime at);
 
-        void Display(IDisplayStrategy strategy);
+        void ViewChatRoomHistory(IAggregation strategy);
     }
 }
