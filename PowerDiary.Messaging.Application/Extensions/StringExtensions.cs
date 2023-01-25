@@ -2,16 +2,7 @@
 {
     public static class StringExtensions
     {
-        public static string Pluralize(this string singular, int occurrence, string plural)
-        {
-            if (string.IsNullOrWhiteSpace(singular))
-                return string.Empty;
-
-            if (string.IsNullOrWhiteSpace(plural))
-                return singular;
-
-            return occurrence == 1 ? singular : plural;
-        }
-            
+        public static string Pluralize(this string singular, int occurrence, string plural) =>
+            occurrence == 1 ? singular : plural;
     }
 }
