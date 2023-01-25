@@ -55,14 +55,14 @@ namespace PowerDiary.Messaging.Application.Services
             });
         }
 
-        private void RecordEvent(EventContext context)
-        {
-            _events.Add(context.OccurredAt, new EventEntry(context));
-        }
-
         public IReadOnlyCollection<EventEntry> GetEvents()
         {
             return _events.Values.ToList();
+        }
+
+        private void RecordEvent(EventContext context)
+        {
+            _events.Add(context.OccurredAt, new EventEntry(context));
         }
     }
 }
