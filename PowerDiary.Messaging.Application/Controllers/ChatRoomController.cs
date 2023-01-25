@@ -34,6 +34,9 @@ namespace PowerDiary.Messaging.Application.Controllers
 
         public void PublishComment(Participant participant, string comment, DateTime at)
         {
+            if (string.IsNullOrWhiteSpace(comment))
+                return;
+
             if (!_room.ContainsParticipant(participant))
                 return;
 
@@ -42,6 +45,9 @@ namespace PowerDiary.Messaging.Application.Controllers
 
         public void SendHighFive(Participant from, Participant to, DateTime at)
         {
+            if (from == to)
+                return;
+
             if (!_room.ContainsParticipant(from) || !_room.ContainsParticipant(to))
                 return;
 
