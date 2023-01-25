@@ -34,16 +34,19 @@ namespace PowerDiary.Messaging.UnitTests.Entities
         }
 
         [Fact]
-        public void ChatRoomDetectsAlreadyJoinedMembers()
+        public void ParticipantCantJoinRoomIfHeAlreadyJoined()
         {
             // Arrange
             var room = new ChatRoom();
             var bob = Participant.Create("Bob");
 
+            // Act
             room.AddParticipant(bob);
 
             // Assert
             room.ContainsParticipant(bob).Should().BeTrue();
         }
+
+
     }
 }

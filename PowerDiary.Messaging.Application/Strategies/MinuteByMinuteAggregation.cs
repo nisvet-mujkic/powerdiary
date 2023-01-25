@@ -8,7 +8,9 @@ namespace PowerDiary.Messaging.Application.Strategies
         public void Render(IEnumerable<EventEntry> events)
         {
             foreach (var @event in events)
+            {
                 Console.WriteLine(BuildMessage(@event));
+            }
         }
 
         private static string BuildMessage(EventEntry @event)

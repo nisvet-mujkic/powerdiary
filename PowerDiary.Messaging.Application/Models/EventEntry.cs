@@ -2,6 +2,16 @@
 
 namespace PowerDiary.Messaging.Application.Models
 {
+    public class EventEntry
+    {
+        public EventEntry(EventContext context)
+        {
+            Context = context;
+        }
+
+        public EventContext Context { get; }
+    }
+
     public class EventContext
     {
         public string EventType { get; set; }
@@ -13,15 +23,5 @@ namespace PowerDiary.Messaging.Application.Models
         public Participant Participant { get; set; }
 
         public Participant OtherParticipant { get; set; }
-    }
-
-    public class EventEntry
-    {
-        public EventEntry(EventContext context)
-        {
-            Context = context;
-        }
-
-        public EventContext Context { get; }
     }
 }
