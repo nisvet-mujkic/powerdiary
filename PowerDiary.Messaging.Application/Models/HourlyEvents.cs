@@ -25,6 +25,6 @@ namespace PowerDiary.Messaging.Application.Models
             new(new TimeOnly(Hour, 0), Events.ToList());
 
         public override string ToString() =>
-            $"{Time:%h tt} ({Events.Count} {"event".Pluralize(Events.Count, "events")})";
+            $"{Time:%htt} ({Events.Count} {"event".Pluralize(Events.Count, "events")})";
     }
 }

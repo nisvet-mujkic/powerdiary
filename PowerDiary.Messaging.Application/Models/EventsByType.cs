@@ -40,7 +40,7 @@ namespace PowerDiary.Messaging.Application.Models
             var givenCount = interactions.Count();
             var receivedCount = interactions.Sum(x => x.To.Count);
 
-            return $"\t- {givenCount} {"participant".Pluralize(givenCount, "participants")} high-fived {receivedCount} {"participant".Pluralize(receivedCount, "participants")}";
+            return $"\t- {givenCount} {"participant".Pluralize(givenCount, "participants")} high-fived {receivedCount} other {"participant".Pluralize(receivedCount, "participants")}";
         }
 
         private static IEnumerable<HighFivesGroup> GetHiveFiveInteractions(EventGroup eventGroup) =>

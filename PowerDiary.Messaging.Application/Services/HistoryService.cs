@@ -15,54 +15,52 @@ namespace PowerDiary.Messaging.Application.Services
 
         public void RecordEntering(Participant participant, DateTime at)
         {
-            RecordEvent(new EventContext()
-            {
-                EventType = Constants.EventType.EnterTheRoom,
-                Participant = participant,
-                OccurredAt = at
-            });
+            var context = EventContextBuilder.New(at)
+                    .WithEventType(Constants.EventType.EnterTheRoom)
+                    .WithParticipant(participant)
+                    .Build();
+
+            RecordEvent(context);
         }
 
         public void RecordLeaving(Participant participant, DateTime at)
         {
-            RecordEvent(new EventContext()
-            {
-                EventType = Constants.EventType.LeaveTheRoom,
-                Participant = participant,
-                OccurredAt = at
-            });
+            var context = EventContextBuilder.New(at)
+                    .WithEventType(Constants.EventType.LeaveTheRoom)
+                    .WithParticipant(participant)
+                    .Build();
+
+            RecordEvent(context);
         }
 
         public void RecordComment(Participant participant, string comment, DateTime at)
         {
-            RecordEvent(new EventContext()
-            {
-                EventType = Constants.EventType.Comment,
-                OccurredAt = at,
-                Comment = comment,
-                Participant = participant,
-            });
+            var context = EventContextBuilder.New(at)
+                    .WithEventType(Constants.EventType.Comment)
+                    .WithParticipant(participant)
+                    .WithComment(comment)
+                    .Build();
+
+            RecordEvent(context);
         }
 
         public void RecordHighFive(Participant from, Participant to, DateTime at)
         {
-            RecordEvent(new EventContext()
-            {
-                EventType = Constants.EventType.HighFive,
-                OccurredAt = at,
-                Participant = from,
-                OtherParticipant = to
-            });
+            var context = EventContextBuilder.New(at)
+                    .WithEventType(Constants.EventType.HighFive)
+                    .WithParticipant(from)
+                    .WithOtherParticipant(to)
+                    .Build();
+
+            RecordEvent(context);
         }
 
-        public IReadOnlyCollection<EventEntry> GetEvents()
-        {
-            return _events.Values.ToList();
-        }
+        public IReadOnlyCollection<EventEntry> GetEvents() =>
+            _events.Values.ToList();
 
         private void RecordEvent(EventContext context)
         {
-            _events.Add(context.OccurredAt, new EventEntry(context));
+            _events.TryAdd(context.OccurredAt, new EventEntry(context));
         }
     }
 }
