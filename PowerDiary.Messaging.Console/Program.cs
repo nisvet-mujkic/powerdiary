@@ -35,11 +35,11 @@ namespace PowerDiary.Messaging.Console
             controller.RemoveParticipant(kate, at.AddMinutes(135));
             controller.RemoveParticipant(john, at.AddHours(3));
 
-            controller.ViewChatRoomHistory(new MinuteByMinuteAggregation());
+            controller.DisplayMinuteByMinuteHistory();
 
             System.Console.WriteLine();
 
-            controller.ViewChatRoomHistory(new HourlyAggregation());
+            controller.DisplayHourlyHistory();
         }
     }
 }

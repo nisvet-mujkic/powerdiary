@@ -4,6 +4,6 @@ namespace PowerDiary.Messaging.Application.Contracts.Strategies
 {
     public interface IAggregation
     {
-        void Render(IEnumerable<EventEntry> events);
+        void Display(IEnumerable<EventEntry> events);
     }
 }

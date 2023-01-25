@@ -5,7 +5,7 @@ namespace PowerDiary.Messaging.Application.Strategies
 {
     public class HourlyAggregation : IAggregation
     {
-        public void Render(IEnumerable<EventEntry> events)
+        public void Display(IEnumerable<EventEntry> events)
         {
             foreach (var eventsGroup in new HourlyEvents(events))
             {

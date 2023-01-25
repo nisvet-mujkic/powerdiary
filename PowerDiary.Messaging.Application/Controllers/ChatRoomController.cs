@@ -1,6 +1,7 @@
 ﻿using PowerDiary.Messaging.Application.Contracts.Controllers;
 using PowerDiary.Messaging.Application.Contracts.Services;
 using PowerDiary.Messaging.Application.Contracts.Strategies;
+using PowerDiary.Messaging.Application.Strategies;
 using PowerDiary.Messaging.Domain.Entities;
 
 namespace PowerDiary.Messaging.Application.Controllers
@@ -54,9 +55,15 @@ namespace PowerDiary.Messaging.Application.Controllers
             _historyService.RecordHighFive(from, to, at);
         }
 
-        public void ViewChatRoomHistory(IAggregation aggregation)
+        public void DisplayMinuteByMinuteHistory() => 
+            DisplayHistory(new MinuteByMinuteAggregation());
+
+        public void DisplayHourlyHistory() =>
+            DisplayHistory(new HourlyAggregation());
+
+        private void DisplayHistory(IAggregation aggregation)
         {
-            aggregation.Render(_historyService.GetEvents());
+            aggregation.Display(_historyService.GetEvents());
         }
     }
 }
