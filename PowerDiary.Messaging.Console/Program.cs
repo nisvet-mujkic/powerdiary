@@ -1,6 +1,5 @@
 ﻿using PowerDiary.Messaging.Application.Contracts.Controllers;
 using PowerDiary.Messaging.Application.Controllers;
-using PowerDiary.Messaging.Application.Factories;
 using PowerDiary.Messaging.Application.Services;
 using PowerDiary.Messaging.Application.Strategies;
 using PowerDiary.Messaging.Domain.Entities;

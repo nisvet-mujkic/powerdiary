@@ -2,10 +2,8 @@
 {
     public record Participant(string Name)
     {
-        public static Participant Create(string name)
-        {
-            return new Participant(name);
-        }
+        public static Participant Create(string name) =>
+            new Participant(name);
 
         public override string ToString() => Name;
     }
