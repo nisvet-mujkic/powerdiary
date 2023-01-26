@@ -36,14 +36,14 @@ namespace PowerDiary.Messaging.Application.Models
 
         private string BuildMessageForHighFiveEvent()
         {
-            var interactions = GetHiveFiveInteractions(this);
+            var interactions = GetHighFiveInteractions(this);
             var givenCount = interactions.Count();
             var receivedCount = interactions.Sum(x => x.To.Count);
 
             return $"\t- {givenCount} {"participant".Pluralize(givenCount, "participants")} high-fived {receivedCount} other {"participant".Pluralize(receivedCount, "participants")}";
         }
 
-        private static IEnumerable<HighFivesGroup> GetHiveFiveInteractions(EventGroup eventGroup) =>
+        private static IEnumerable<HighFivesGroup> GetHighFiveInteractions(EventGroup eventGroup) =>
             eventGroup.Events.GroupBy(x => x.Context.Participant, (from, to) =>
                     new HighFivesGroup(from.Name, to.Select(x => x.Context.OtherParticipant).ToList()));
 
