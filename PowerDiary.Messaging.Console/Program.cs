@@ -12,17 +12,17 @@ namespace PowerDiary.Messaging.Console
         {
             var controller = new ChatRoomController(new ChatRoom(), new HistoryService());
 
-            InitializeData(controller);
+            SimulateChatRoomActivity(controller);
 
             controller.DisplayMinuteByMinuteHistory();
 
             System.Console.WriteLine();
-            Thread.Sleep(3000);
+            Thread.Sleep(1500);
 
             controller.DisplayHourlyHistory();
         }
 
-        static void InitializeData(IChatRoomController controller)
+        static void SimulateChatRoomActivity(IChatRoomController controller)
         {
             var at = DateTime.Today.AddHours(11);
 

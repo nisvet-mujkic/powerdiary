@@ -9,14 +9,13 @@ namespace PowerDiary.Messaging.Application.Services
 
         private EventContextBuilder(DateTime occurredAt)
         {
-            _eventContext = new EventContext()
+            _eventContext = new()
             {
                 OccurredAt = occurredAt
             };
         }
 
-        public static EventContextBuilder New(DateTime occurredAt) =>
-            new EventContextBuilder(occurredAt);
+        public static EventContextBuilder New(DateTime occurredAt) => new(occurredAt);
 
         public EventContextBuilder WithEventType(string eventType)
         {
